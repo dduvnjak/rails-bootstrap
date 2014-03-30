@@ -5,7 +5,7 @@ set :application, 'rails_bootstrap'
 set :repo_url, 'https://github.com/dduvnjak/rails-bootstrap'
 
 # Default branch is :master
-ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/vagrant/rails_bootstrap'
@@ -41,6 +41,8 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
+
+      sudo "/etc/init.d/nginx reload"
     end
   end
 
